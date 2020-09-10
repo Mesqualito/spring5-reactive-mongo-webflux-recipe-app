@@ -4,6 +4,8 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.*;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.CategoryRepository;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.RecipeRepository;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.UnitOfMeasureRepository;
+import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.CategoryReactiveRepository;
+import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.RecipeReactiveRepository;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.UnitOfMeasureReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Autowired
     UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
 
+    @Autowired
+    CategoryReactiveRepository categoryReactiveRepository;
+
+    @Autowired
+    RecipeReactiveRepository recipeReactiveRepository;
+
     public RecipeBootstrap(CategoryRepository categoryRepository,
                            RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
@@ -48,10 +56,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         // Publisher.method().block() - the '.block()' says: "run this now"
         // but it's blocking, what we don't want to do!
         // It's only a temporary first test whether the reactive repository is working.
-        log.error("####################################");
-        log.error("Units of Measure in its reactive repository after loading bootstrap data: " +
-                unitOfMeasureReactiveRepository.count().block().toString() + " mongodb Documents.");
-        log.error("####################################");
+        log.error("\nAfter loading bootstrap data:\n" +
+                "- Units of Measure in their reactive repository: " +
+                unitOfMeasureReactiveRepository.count().block().toString() + " mongodb Documents.\n" +
+                "- Categories in their reactive repository: " + categoryReactiveRepository.count().block().toString() +
+                " mongodb Documents\n" +
+                "- Recipes in their reactive repository: " + recipeReactiveRepository.count().block().toString() +
+                " mongodb Documents");
 
     }
 
