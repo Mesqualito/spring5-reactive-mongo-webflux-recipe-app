@@ -21,8 +21,10 @@ repositories {
 
 ext['junit-jupiter.version'] = '5.6.2'
 
+// see: https://stackoverflow.com/questions/53709282/cannot-add-task-wrapper-as-a-task-with-that-name-already-exists (etc.)
 wrapper {
     gradleVersion = '6.6.1'
+    distributionUrl = distributionUrl.replace("bin", "all")
 }
 
 dependencies {
