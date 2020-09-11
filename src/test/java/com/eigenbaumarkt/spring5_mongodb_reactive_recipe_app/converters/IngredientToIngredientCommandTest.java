@@ -4,16 +4,13 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.Ingredient
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Ingredient;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.UnitOfMeasure;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by jt on 6/21/17.
- */
 public class IngredientToIngredientCommandTest {
 
     public static final Recipe RECIPE = new Recipe();
@@ -25,7 +22,7 @@ public class IngredientToIngredientCommandTest {
 
     IngredientToIngredientCommand converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
     }

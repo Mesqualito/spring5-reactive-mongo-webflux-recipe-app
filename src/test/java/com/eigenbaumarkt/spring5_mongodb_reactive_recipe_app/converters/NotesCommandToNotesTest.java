@@ -2,10 +2,10 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.NotesCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Notes;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NotesCommandToNotesTest {
 
@@ -13,7 +13,7 @@ public class NotesCommandToNotesTest {
     public static final String RECIPE_NOTES = "Notes";
     NotesCommandToNotes converter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new NotesCommandToNotes();
 

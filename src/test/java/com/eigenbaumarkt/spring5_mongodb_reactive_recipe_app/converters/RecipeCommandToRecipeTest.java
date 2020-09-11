@@ -6,10 +6,10 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.NotesComma
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.RecipeCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Difficulty;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RecipeCommandToRecipeTest {
     public static final String RECIPE_ID = "1";
@@ -30,7 +30,7 @@ public class RecipeCommandToRecipeTest {
     RecipeCommandToRecipe converter;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),
                 new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),

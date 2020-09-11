@@ -6,10 +6,6 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-
-/**
- * Created by jt on 6/21/17.
- */
 @Component
 public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 

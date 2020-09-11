@@ -5,20 +5,12 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters.RecipeCo
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters.RecipeToRecipeCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.RecipeRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-
-
-/**
- * Created by jt on 6/21/17.
- */
+import static org.junit.jupiter.api.Assertions.assertEquals;
 //@DataMongoTest
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class RecipeServiceIT {
 

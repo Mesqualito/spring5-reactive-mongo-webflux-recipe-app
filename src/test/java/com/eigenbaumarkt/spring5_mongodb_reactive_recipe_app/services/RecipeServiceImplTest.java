@@ -7,8 +7,8 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters.RecipeTo
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.exceptions.NotFoundException;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.RecipeRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -16,9 +16,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 
 public class RecipeServiceImplTest {
@@ -34,7 +35,7 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
@@ -56,16 +57,16 @@ public class RecipeServiceImplTest {
         verify(recipeRepository, never()).findAll();
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void getRecipeByIdTestNotFound() throws Exception {
 
         Optional<Recipe> recipeOptional = Optional.empty();
 
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        Recipe recipeReturned = recipeService.findById("1");
+        assertThrows(NotFoundException.class, () -> recipeService.findById("1"),
+                "There is no recipe with ID 1!");
 
-        //should go boom
     }
 
     @Test
