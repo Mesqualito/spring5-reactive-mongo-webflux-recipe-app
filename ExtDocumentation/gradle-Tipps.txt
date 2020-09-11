@@ -1,2 +1,2 @@
 Einzelnen Test auslösen:
-$ ./gradlew test --tests com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.UnitOfMeasureReactiveRepositoryIT
+$ ./gradlew test --tests com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.UnitOfMeasureReactiveRepositoryTest

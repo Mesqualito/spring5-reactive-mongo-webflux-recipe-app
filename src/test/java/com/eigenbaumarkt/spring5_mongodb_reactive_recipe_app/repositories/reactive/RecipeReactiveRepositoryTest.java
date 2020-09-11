@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataMongoTest
-public class UnitOfMeasureReactiveRepositoryIT {
+public class RecipeReactiveRepositoryTest {
 
     @Autowired
     RecipeReactiveRepository recipeReactiveRepository;
@@ -23,9 +23,8 @@ public class UnitOfMeasureReactiveRepositoryIT {
 
     @Test
     public void testRecipeSave() throws Exception {
-
         Recipe recipe = new Recipe();
-        recipe.setDescription("A test recipe");
+        recipe.setDescription("Test-Rezept");
 
         recipeReactiveRepository.save(recipe).block();
 
@@ -33,4 +32,5 @@ public class UnitOfMeasureReactiveRepositoryIT {
 
         assertEquals(Long.valueOf(1L), count);
     }
+
 }
