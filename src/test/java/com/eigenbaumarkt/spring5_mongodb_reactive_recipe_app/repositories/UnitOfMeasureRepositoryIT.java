@@ -2,16 +2,17 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.UnitOfMeasure;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-@DataJpaTest
+@Disabled
+@DataMongoTest
 public class UnitOfMeasureRepositoryIT {
 
     @Autowired

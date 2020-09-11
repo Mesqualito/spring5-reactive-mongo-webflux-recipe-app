@@ -19,6 +19,8 @@ repositories {
     mavenCentral()
 }
 
+ext['junit-jupiter.version'] = '5.6.2'
+
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -46,7 +48,7 @@ dependencies {
 
     // wenn @Nullable verwendet wird, kommt die Warnung 'Warning:java: unknown enum constant javax.annotation.meta.When.MAYBE'
     // Abhilfe (siehe: https://html.developreference.com/article/10955407/Spring+nullable+annotation+generates+unknown+enum+constant+warning):
-    testImplementation 'com.google.code.findbugs:annotations'
+    testImplementation 'com.google.code.findbugs:annotations:3.0.1'
 }
 
 test {
