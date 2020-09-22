@@ -13,6 +13,6 @@ zzgl. Updates auf:
 - Spring Boot 2.3.3.RELEASE
 - Gradle Wrapper 6.6.1
 - JUnit5 (5.6.2)
-- Bootstrap Webjars 3.4.1
+- Bootstrap Webjars 3.3.7-1
 
 Spring Framework 5 Online-Kurs: [http://courses.springframework.guru/p/spring-framework-5-begginer-to-guru](http://courses.springframework.guru/p/spring-framework-5-begginer-to-guru).
