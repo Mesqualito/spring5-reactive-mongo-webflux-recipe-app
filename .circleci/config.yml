@@ -1,11 +1,11 @@
 # Java Maven CircleCI 2.0 configuration file
 
-version: 2.1
+version: 2.0
 
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:13.0.2-jdk-buster-browsers
+      - image: circleci/openjdk:14.0.2-jdk-buster-browsers
 
     working_directory: ~/repo
 
