@@ -18,6 +18,7 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
+    // "breaking" the reactive mongodb driver, TODO: implement with id to store
     @DBRef
     private UnitOfMeasure uom;
 
