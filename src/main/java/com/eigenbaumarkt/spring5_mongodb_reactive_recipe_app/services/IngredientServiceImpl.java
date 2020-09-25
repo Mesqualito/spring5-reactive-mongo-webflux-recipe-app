@@ -41,45 +41,21 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Mono<IngredientCommand> findByRecipeIdAndIngredientId(String recipeId, String ingredientId) {
 
-        return recipeReactiveRepository.findById(recipeId)
-                .map(recipe -> recipe.getIngredients()
-                .stream()
+        // with reactive streams:
+        return recipeReactiveRepository
+                .findById(recipeId)
+                // reactor.core.publisher.Mono<T> public final <R> reactor.core.publisher.Flux<R> flatMapIterable(@NotNull java.util.function.Function<? super T, ? extends Iterable<? extends R>> mapper)
+                .flatMapIterable(Recipe::getIngredients)
+                // reactor.core.publisher.Flux<T> public final Flux<T> filter(@NotNull java.util.function.Predicate<? super T> p)
                 .filter(ingredient -> ingredient.getId().equalsIgnoreCase(ingredientId))
-                .findFirst())
-                // continue if found:
-                .filter(Optional::isPresent)
-                // map is a transform operation:
+                // reduce it to Mono with reactor.core.publisher.Flux<T> public final reactor.core.publisher.Mono<T> single()
+                .single()
                 .map(ingredient -> {
-                    IngredientCommand command = ingredientToIngredientCommand.convert(ingredient.get());
+                    IngredientCommand command = ingredientToIngredientCommand.convert(ingredient);
                     command.setRecipeId(recipeId);
                     return command;
                 });
-
-        /*
-        if (!recipeOptional.isPresent()){
-            //todo impl error handling
-            log.error("recipe id not found. Id: " + recipeId);
-        }
-
-        Recipe recipe = recipeOptional.get();
-
-        Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
-                .filter(ingredient -> ingredient.getId().equals(ingredientId))
-                .map( ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
-
-        if(!ingredientCommandOptional.isPresent()){
-            //todo impl error handling
-            log.error("Ingredient id not found: " + ingredientId);
-        }
-
-        //enhance command object with recipe id
-        IngredientCommand ingredientCommand = ingredientCommandOptional.get();
-        ingredientCommand.setRecipeId(recipe.getId());
-
-        return Mono.just(ingredientCommandOptional.get());
-
-         */
-    }
+                }
 
     @Override
     public Mono<IngredientCommand> saveIngredientCommand(IngredientCommand command) {
@@ -152,7 +128,7 @@ public class IngredientServiceImpl implements IngredientService {
         // we get a list of recipe-Objects with "uom"-objects as properties,
         // but the "id" and "description" of the uoms are null
         // IMPORTANT TODO: DBRefs are not recommended, better store ids and load them at application level !!
-        Recipe recipeReactive = recipeReactiveRepository.findById(recipeId).block(); // doesn't do anything, just left for TODO
+        // Recipe recipeReactive = recipeReactiveRepository.findById(recipeId).block();
 
         // non-reactive alternative:
         Recipe recipe = recipeRepository.findById(recipeId).get();
@@ -169,13 +145,13 @@ public class IngredientServiceImpl implements IngredientService {
 
             if(ingredientOptional.isPresent()){
                 log.debug("found Ingredient");
+
                 recipe.getIngredients().remove(ingredientOptional.get());
-                recipeReactiveRepository.save(recipe).block();
+                recipeRepository.save(recipe);
             }
         } else {
-            log.debug("Recipe Id not found. Id: " + recipeId);
+            log.debug("Recipe Id Not found. Id:" + recipeId);
         }
-
         return Mono.empty();
     }
 }
