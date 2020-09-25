@@ -126,7 +126,7 @@ public class IngredientServiceImplTest {
 
         when(recipeRepository.findById(anyString())).thenReturn(recipeOptional);
 
-        //when
+        // when
         ingredientService.deleteById("1", "3");
 
         //then

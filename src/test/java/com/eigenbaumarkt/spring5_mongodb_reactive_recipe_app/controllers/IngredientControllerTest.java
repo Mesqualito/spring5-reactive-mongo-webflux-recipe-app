@@ -138,9 +138,12 @@ public class IngredientControllerTest {
     @Test
     public void testDeleteIngredient() throws Exception {
 
+        // previously the delete-Method returned nothing ("void")
+        // now we're expecting a value to come back:
+        // 'ingredientService.deleteById(recipeId, id).block();' in IngredientController, so:
         when(ingredientService.deleteById(anyString(), anyString())).thenReturn(Mono.empty());
 
-        //then
+        // then
         mockMvc.perform(get("/recipe/2/ingredient/3/delete")
         )
                 .andExpect(status().is3xxRedirection())
