@@ -58,7 +58,7 @@ public class IngredientServiceImpl implements IngredientService {
 
         if (recipe == null){
 
-            //todo toss error if not found!
+            // todo toss error if not found!
             log.error("Recipe not found for id: " + command.getRecipeId());
             return Mono.just(new IngredientCommand());
         } else {
