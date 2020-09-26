@@ -56,7 +56,7 @@ public class IngredientController {
         // need to return back parent id for hidden form property
         IngredientCommand ingredientCommand = new IngredientCommand();
         log.debug("New ingredient id: " + ingredientCommand.getId());
-        model.addAttribute("ingredient", ingredientService.saveIngredientCommand(ingredientCommand).block());
+        model.addAttribute("ingredient", ingredientCommand);
 
         // init uom
         ingredientCommand.setUom(new UnitOfMeasureCommand());

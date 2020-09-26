@@ -67,7 +67,7 @@ public class RecipeController {
 
         log.debug("Deleting id: " + id);
 
-        recipeService.deleteById(id).block();
+        recipeService.deleteById(id);
         return "redirect:/";
     }
 
