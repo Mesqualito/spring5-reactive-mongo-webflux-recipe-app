@@ -3,7 +3,6 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Set;
@@ -19,6 +18,7 @@ public class Category {
     private String id;
     private String description;
 
-    @DBRef
+    // will not play well with MongoDB, see: https://jira.spring.io/browse/DATAMONGO-1584
+    // @DBRef
     private Set<Recipe> recipes;
 }

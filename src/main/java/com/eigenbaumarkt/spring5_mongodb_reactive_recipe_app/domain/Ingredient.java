@@ -2,7 +2,6 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -18,8 +17,7 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
-    // "breaking" the reactive mongodb driver, TODO: implement with id to store
-    @DBRef
+    // '@DBRef' will not play well with MongoDB, see: https://jira.spring.io/browse/DATAMONGO-1584
     private UnitOfMeasure uom;
 
     public Ingredient() {

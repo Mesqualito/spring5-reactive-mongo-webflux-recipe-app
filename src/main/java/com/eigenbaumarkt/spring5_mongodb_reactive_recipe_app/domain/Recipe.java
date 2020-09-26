@@ -3,7 +3,6 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
@@ -31,7 +30,7 @@ public class Recipe {
     private Difficulty difficulty;
     private Notes notes;
 
-    @DBRef
+    // '@DBRef' will not play well with MongoDB, see: https://jira.spring.io/browse/DATAMONGO-1584
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
