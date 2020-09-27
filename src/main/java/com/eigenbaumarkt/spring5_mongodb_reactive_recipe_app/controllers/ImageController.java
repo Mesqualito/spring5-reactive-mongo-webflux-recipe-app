@@ -1,9 +1,7 @@
 package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.controllers;
 
-import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.RecipeCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.services.ImageService;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.services.RecipeService;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
- * Created by jt on 7/3/17.
+ * ImageHandler
  */
 @Controller
 public class ImageController {
@@ -46,6 +39,7 @@ public class ImageController {
         return "redirect:/recipe/" + id + "/show";
     }
 
+    /*
     @GetMapping("recipe/{id}/recipeimage")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
         RecipeCommand recipeCommand = recipeService.findCommandById(id).block();
@@ -63,4 +57,6 @@ public class ImageController {
             IOUtils.copy(is, response.getOutputStream());
         }
     }
+
+    */
 }

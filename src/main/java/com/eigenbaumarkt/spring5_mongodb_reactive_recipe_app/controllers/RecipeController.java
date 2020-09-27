@@ -1,15 +1,15 @@
 package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.controllers;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.RecipeCommand;
-import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.exceptions.NotFoundException;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -71,6 +71,7 @@ public class RecipeController {
         return "redirect:/";
     }
 
+    /*
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception exception){
@@ -85,5 +86,7 @@ public class RecipeController {
 
         return modelAndView;
     }
+
+     */
 
 }
