@@ -1,9 +1,25 @@
 # spring5-reactive-mongo-webflux-recipe-app
+---------------------------------------------------------
 Reactive Recipe Application using (embedded) MongoDB & MongoDB Reactive
 
 [![CircleCI](https://circleci.com/gh/Mesqualito/spring5-reactive-mongo-webflux-recipe-app.svg?style=shield)](https://circleci.com/gh/Mesqualito/spring5-reactive-mongo-recipe-app)
 
 [![codecov](https://codecov.io/gh/Mesqualito/spring5-reactive-mongo-webflux-recipe-app/branch/master/graph/badge.svg)](https://codecov.io/gh/Mesqualito/spring5-reactive-mongo-recipe-app)
+
+-----------------------------------------------------------------------
+
+Use Spring WebMVC stack which uses the Servlet API and the ServletContainer:
+
+implementation 'org.springframework.boot:spring-boot-starter-web'
+
+Use Spring reactive web; see: https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/web-reactive.html.
+The spring-webflux stack uses HTTP / Reactive Streams on Tomcat (alt.: Jetty, Netty, Undertow):
+
+implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+Spring Boot will appropriate configure all dependencies as well as Autoconfiguration e.g. for Thymeleaf (ThymeleafAutoConfiguration.java)
+
+-----------------------------------------------------------------------
 
 Dieses Repository ist eine Beispiel-Anwendung aus dem Kurs "Spring Framework 5 - Beginner to Guru" von John Thompsons
 

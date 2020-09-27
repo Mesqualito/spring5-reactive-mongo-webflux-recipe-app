@@ -34,12 +34,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.webjars:bootstrap:3.3.7-1'
-
-    // brings in the spring-web-mvc stack which uses the Servlet API and the ServletContainer; see:
     // implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    // brings in Spring reactive web; see: https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/web-reactive.html
-    // the spring-webflux stack uses HTTP / Reactive Streams on Tomcat (alt.: Jetty, Netty, Undertow)
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
     implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
