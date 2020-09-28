@@ -21,7 +21,7 @@ public class IndexController {
         log.debug("Getting Index page");
 
         // not (yet) add in an reactive object, but the recipes as list
-        model.addAttribute("recipes", recipeService.getRecipes().collectList().block());
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
