@@ -2,10 +2,10 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.UnitOfMeasureCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.UnitOfMeasure;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class UnitOfMeasureCommandToUnitOfMeasureTest {
 
@@ -14,7 +14,7 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
 
     UnitOfMeasureCommandToUnitOfMeasure converter;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         converter = new UnitOfMeasureCommandToUnitOfMeasure();
 
@@ -32,15 +32,15 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
 
     @Test
     public void convert() throws Exception {
-        // given
+        //given
         UnitOfMeasureCommand command = new UnitOfMeasureCommand();
         command.setId(LONG_VALUE);
         command.setDescription(DESCRIPTION);
 
-        // when
+        //when
         UnitOfMeasure uom = converter.convert(command);
 
-        // then
+        //then
         assertNotNull(uom);
         assertEquals(LONG_VALUE, uom.getId());
         assertEquals(DESCRIPTION, uom.getDescription());

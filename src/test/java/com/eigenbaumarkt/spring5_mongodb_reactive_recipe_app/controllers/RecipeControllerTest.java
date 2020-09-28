@@ -4,8 +4,9 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.RecipeComm
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.exceptions.NotFoundException;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.services.RecipeService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
@@ -20,6 +21,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Created by jt on 6/19/17.
+ */
+@Ignore
 public class RecipeControllerTest {
 
     @Mock
@@ -29,7 +34,7 @@ public class RecipeControllerTest {
 
     MockMvc mockMvc;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 

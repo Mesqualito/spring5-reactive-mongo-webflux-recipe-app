@@ -9,16 +9,17 @@ import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 
+/**
+ * Created by jt on 7/3/17.
+ */
 @Slf4j
 @Service
 public class ImageServiceImpl implements ImageService {
 
-
     private final RecipeReactiveRepository recipeReactiveRepository;
 
-    public ImageServiceImpl( RecipeReactiveRepository recipeReactiveRepository) {
-
-        this.recipeReactiveRepository = recipeReactiveRepository;
+    public ImageServiceImpl(RecipeReactiveRepository recipeService) {
+        this.recipeReactiveRepository = recipeService;
     }
 
     @Override
@@ -26,23 +27,29 @@ public class ImageServiceImpl implements ImageService {
 
         Mono<Recipe> recipeMono = recipeReactiveRepository.findById(recipeId)
                 .map(recipe -> {
-                    Byte[] imageByteObjects = new Byte[0];
+                    Byte[] byteObjects = new Byte[0];
                     try {
-                        imageByteObjects = new Byte[file.getBytes().length];
+                        byteObjects = new Byte[file.getBytes().length];
+
                         int i = 0;
-                        for(byte b : file.getBytes()) {
-                            imageByteObjects[i++] = b;
+
+                        for (byte b : file.getBytes()) {
+                            byteObjects[i++] = b;
                         }
-                        recipe.setImage(imageByteObjects);
+
+                        recipe.setImage(byteObjects);
+
                         return recipe;
-                    } catch (IOException ioe) {
-                        ioe.printStackTrace();
-                        throw new RuntimeException(ioe);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
                 });
 
         recipeReactiveRepository.save(recipeMono.block()).block();
 
         return Mono.empty();
+
     }
 }

@@ -1,16 +1,18 @@
 package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-
+/**
+ * Created by jt on 6/17/17.
+ */
 public class CategoryTest {
 
     Category category;
 
-    @BeforeEach
+    @Before
     public void setUp(){
         category = new Category();
     }

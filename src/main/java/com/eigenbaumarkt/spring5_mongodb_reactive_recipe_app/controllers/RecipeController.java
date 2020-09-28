@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Created by jt on 6/19/17.
+ */
 @Slf4j
 @Controller
 public class RecipeController {
@@ -23,14 +26,13 @@ public class RecipeController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
+    public void initBinder(WebDataBinder webDataBinder){
         this.webDataBinder = webDataBinder;
     }
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
 
-        // Thymeleaf will handle the Publisher Mono itself:
         model.addAttribute("recipe", recipeService.findById(id));
 
         return "recipe/show";
@@ -45,7 +47,7 @@ public class RecipeController {
 
     @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
-        model.addAttribute("recipe", recipeService.findCommandById(id));
+        model.addAttribute("recipe", recipeService.findCommandById(id).block());
         return RECIPE_RECIPEFORM_URL;
     }
 
@@ -78,22 +80,19 @@ public class RecipeController {
         return "redirect:/";
     }
 
-    /*
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleNotFound(Exception exception){
-
-        log.error("Handling not found exception");
-        log.error(exception.getMessage());
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("404error");
-        modelAndView.addObject("exception", exception);
-
-        return modelAndView;
-    }
-
-     */
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(NotFoundException.class)
+//    public ModelAndView handleNotFound(Exception exception){
+//
+//        log.error("Handling not found exception");
+//        log.error(exception.getMessage());
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//
+//        modelAndView.setViewName("404error");
+//        modelAndView.addObject("exception", exception);
+//
+//        return modelAndView;
+//    }
 
 }

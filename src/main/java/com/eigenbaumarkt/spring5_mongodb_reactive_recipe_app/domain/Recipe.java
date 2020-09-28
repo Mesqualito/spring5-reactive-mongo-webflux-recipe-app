@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 6/13/17.
+ */
 @Getter
 @Setter
 @Document
@@ -26,8 +29,6 @@ public class Recipe {
     private Byte[] image;
     private Difficulty difficulty;
     private Notes notes;
-
-    // '@DBRef' will not play well with MongoDB, see: https://jira.spring.io/browse/DATAMONGO-1584
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {

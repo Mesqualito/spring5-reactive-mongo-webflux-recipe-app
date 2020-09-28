@@ -2,11 +2,14 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.UnitOfMeasureCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.UnitOfMeasure;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
+/**
+ * Created by jt on 6/21/17.
+ */
 public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     public static final String DESCRIPTION = "description";
@@ -14,7 +17,7 @@ public class UnitOfMeasureToUnitOfMeasureCommandTest {
 
     UnitOfMeasureToUnitOfMeasureCommand converter;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         converter = new UnitOfMeasureToUnitOfMeasureCommand();
     }

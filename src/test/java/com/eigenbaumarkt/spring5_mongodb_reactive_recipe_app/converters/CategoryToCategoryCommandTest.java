@@ -2,18 +2,21 @@ package com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters;
 
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.commands.CategoryCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Category;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
+/**
+ * Created by jt on 6/21/17.
+ */
 public class CategoryToCategoryCommandTest {
 
     public static final String ID_VALUE = "1";
     public static final String DESCRIPTION = "descript";
     CategoryToCategoryCommand convter;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         convter = new CategoryToCategoryCommand();
     }

@@ -17,8 +17,5 @@ public class Category {
     @Id
     private String id;
     private String description;
-
-    // will not play well with MongoDB, see: https://jira.spring.io/browse/DATAMONGO-1584
-    // @DBRef
     private Set<Recipe> recipes;
 }

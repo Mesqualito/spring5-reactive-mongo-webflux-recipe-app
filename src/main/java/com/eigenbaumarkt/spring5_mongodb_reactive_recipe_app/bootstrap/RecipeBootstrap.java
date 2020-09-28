@@ -34,9 +34,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        loadUom();
         loadCategories();
-
+        loadUom();
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
 
@@ -98,7 +97,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         List<Recipe> recipes = new ArrayList<>(2);
 
-        // get UOMs
+        //get UOMs
         Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByDescription("Each");
 
         if(!eachUomOptional.isPresent()){
@@ -135,7 +134,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
             throw new RuntimeException("Expected UOM Not Found");
         }
 
-        // get optionals
+        //get optionals
         UnitOfMeasure eachUom = eachUomOptional.get();
         UnitOfMeasure tableSpoonUom = tableSpoonUomOptional.get();
         UnitOfMeasure teapoonUom = tableSpoonUomOptional.get();
@@ -143,7 +142,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure pintUom = dashUomOptional.get();
         UnitOfMeasure cupsUom = cupsUomOptional.get();
 
-        // get Categories
+        //get Categories
         Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
 
         if(!americanCategoryOptional.isPresent()){

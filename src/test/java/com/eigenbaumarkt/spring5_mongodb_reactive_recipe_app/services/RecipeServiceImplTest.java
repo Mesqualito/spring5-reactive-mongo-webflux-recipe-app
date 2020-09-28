@@ -6,8 +6,8 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters.RecipeCo
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.converters.RecipeToRecipeCommand;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.domain.Recipe;
 import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.repositories.reactive.RecipeReactiveRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Flux;
@@ -16,11 +16,13 @@ import reactor.core.publisher.Mono;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
-
+/**
+ * Created by jt on 6/17/17.
+ */
 public class RecipeServiceImplTest {
 
     RecipeServiceImpl recipeService;
@@ -34,7 +36,7 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
 
-    @BeforeEach
+    @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
@@ -54,6 +56,7 @@ public class RecipeServiceImplTest {
         verify(recipeReactiveRepository, times(1)).findById(anyString());
         verify(recipeReactiveRepository, never()).findAll();
     }
+
 
     @Test
     public void getRecipeCommandByIdTest() throws Exception {
@@ -78,8 +81,8 @@ public class RecipeServiceImplTest {
     public void getRecipesTest() throws Exception {
 
         Recipe recipe = new Recipe();
-        HashSet recipesData = new HashSet();
-        recipesData.add(recipe);
+        HashSet receipesData = new HashSet();
+        receipesData.add(recipe);
 
         when(recipeService.getRecipes()).thenReturn(Flux.just(recipe));
 
@@ -93,13 +96,15 @@ public class RecipeServiceImplTest {
     @Test
     public void testDeleteById() throws Exception {
 
-        // given
+        //given
         String idToDelete = "2";
 
-        // when
+        when(recipeReactiveRepository.deleteById(anyString())).thenReturn(Mono.empty());
+
+        //when
         recipeService.deleteById(idToDelete);
 
-        // then
+        //then
         verify(recipeReactiveRepository, times(1)).deleteById(anyString());
     }
 }

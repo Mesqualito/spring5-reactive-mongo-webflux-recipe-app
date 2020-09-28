@@ -8,6 +8,5 @@ import reactor.core.publisher.Flux;
  */
 public interface UnitOfMeasureService {
 
-    // Flux is none or many
     Flux<UnitOfMeasureCommand> listAllUoms();
 }

@@ -9,11 +9,13 @@ import com.eigenbaumarkt.spring5_mongodb_reactive_recipe_app.services.UnitOfMeas
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * Created by jt on 6/28/17.
+ */
 @Slf4j
 @Controller
 public class IngredientController {
@@ -22,10 +24,17 @@ public class IngredientController {
     private final RecipeService recipeService;
     private final UnitOfMeasureService unitOfMeasureService;
 
+    private WebDataBinder webDataBinder;
+
     public IngredientController(IngredientService ingredientService, RecipeService recipeService, UnitOfMeasureService unitOfMeasureService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
         this.unitOfMeasureService = unitOfMeasureService;
+    }
+
+    @InitBinder("ingredient")
+    public void initBinder(WebDataBinder webDataBinder){
+        this.webDataBinder = webDataBinder;
     }
 
     @GetMapping("/recipe/{recipeId}/ingredients")
@@ -48,17 +57,15 @@ public class IngredientController {
     @GetMapping("recipe/{recipeId}/ingredient/new")
     public String newRecipe(@PathVariable String recipeId, Model model){
 
-        // make sure we have a good id value
+        //make sure we have a good id value
         RecipeCommand recipeCommand = recipeService.findCommandById(recipeId).block();
-        log.debug("Recipe id: " + recipeCommand.getId() + " - we'll add a new ingrediet to it!");
-        // TODO raise exception if null
+        //todo raise exception if null
 
-        // need to return back parent id for hidden form property
+        //need to return back parent id for hidden form property
         IngredientCommand ingredientCommand = new IngredientCommand();
-        log.debug("New ingredient id: " + ingredientCommand.getId());
         model.addAttribute("ingredient", ingredientCommand);
 
-        // init uom
+        //init uom
         ingredientCommand.setUom(new UnitOfMeasureCommand());
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
@@ -69,14 +76,29 @@ public class IngredientController {
     @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model model){
-        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id));
+        model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
 
         model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
         return "recipe/ingredient/ingredientform";
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command){
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command,
+                               Model model){
+
+        webDataBinder.validate();
+        BindingResult bindingResult = webDataBinder.getBindingResult();
+
+        if(bindingResult.hasErrors()){
+
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
+            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+            return "recipe/ingredient/ingredientform";
+        }
+
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
 
         log.debug("saved ingredient id:" + savedCommand.getId());
