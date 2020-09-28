@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 
 /**
  * Created by jt on 6/28/17.
@@ -32,6 +33,7 @@ public class IngredientController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
+    // gets set with every web request
     @InitBinder("ingredient")
     public void initBinder(WebDataBinder webDataBinder){
         this.webDataBinder = webDataBinder;
@@ -68,7 +70,8 @@ public class IngredientController {
         //init uom
         ingredientCommand.setUom(new UnitOfMeasureCommand());
 
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        // with new @ModelAttribute-Method, the "uomList" will be bound on every web request
+        // model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
 
         return "recipe/ingredient/ingredientform";
     }
@@ -78,7 +81,8 @@ public class IngredientController {
                                          @PathVariable String id, Model model){
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(recipeId, id).block());
 
-        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+        // with new @ModelAttribute-Method, the "uomList" will be bound on every web request
+        // model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
         return "recipe/ingredient/ingredientform";
     }
 
@@ -95,7 +99,8 @@ public class IngredientController {
                 log.debug(objectError.toString());
             });
 
-            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+            // with new @ModelAttribute-Method, the "uomList" will be bound on every web request
+            // model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
             return "recipe/ingredient/ingredientform";
         }
 
@@ -114,5 +119,12 @@ public class IngredientController {
         ingredientService.deleteById(recipeId, id).block();
 
         return "redirect:/recipe/" + recipeId + "/ingredients";
+    }
+
+    // creates an attribute at every web request in the class,
+    // here: the property "uomList" with the return object of the given method:
+    @ModelAttribute("uomList")
+    public Flux<UnitOfMeasureCommand> populateUomList() {
+        return unitOfMeasureService.listAllUoms();
     }
 }
