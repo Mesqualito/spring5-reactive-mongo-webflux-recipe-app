@@ -11,21 +11,17 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 
+
 @Configuration
 public class WebConfiguration {
 
     @Bean
-    RouterFunction<?> routes(RecipeService recipeService) {
-
-        // in "api/recipes"
+    public RouterFunction<?> routes(RecipeService recipeService){
         return RouterFunctions.route(GET("/api/recipes"),
-                // we deliver a ServerResponse
                 serverRequest -> ServerResponse
                         .ok()
-                        // as JSON-Object
                         .contentType(MediaType.APPLICATION_JSON)
-                        // get Flux with no or some Recipe-Objects
                         .body(recipeService.getRecipes(), Recipe.class));
-    }
 
+    }
 }
